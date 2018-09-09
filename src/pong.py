@@ -20,6 +20,8 @@ from src.utils import *
 DEFINE_boolean("reset_output_dir", False, "Delete output_dir if exists.")
 DEFINE_boolean("restore", False, "Restore from checkpoint")
 DEFINE_boolean("render", False, "Show Game")
+DEFINE_integer("render_every", 1, "How often to render the game")
+DEFINE_integer("render_speed", 1, "How fast to render the game")
 DEFINE_string("data_path", "", "")
 DEFINE_string("output_dir", "", "")
 DEFINE_integer("num_samples", 1, "How many screens to group")
@@ -141,8 +143,9 @@ def train(hparams):
       curstate = preProcess(curstate)
 
       while not done:
-        if eps%500 == 0 and hparams.render:
+        if hparams.render and eps%hparams.render_every == 0:
           env.render()  
+          time.sleep(0.1/hparams.render_speed)
 
         state = curstate-prevstate
         prevstate = curstate
@@ -180,8 +183,6 @@ def train(hparams):
         }
         (loss, _) = sess.run(run_ops, feed_dict=feed_dict)
 
-      if eps % hparams.reset_every == 0:
-        all_states, all_rewards, all_actions = [], [], []
 
       if eps % hparams.log_every == 0:
         log_string = "eps={0:<4d}".format(eps)
@@ -224,6 +225,8 @@ def main(_):
     restore=FLAGS.restore,
     beta=FLAGS.beta,
     render=FLAGS.render,
+    render_every=FLAGS.render_every,
+    render_speed=FLAGS.render_speed
   )
   train(hparams)
 
