@@ -19,6 +19,7 @@ The following settings can be adjusted in the pong.sh file found in the scripts 
 * discount (float): Decay factor for the rewards
 * restore (bool): True indicates restoring the model from a checkpoint, False otherwise
 * render (bool): Whether or not to render the game during each episode
-* render_every (int): How often to render the game played by the model
+* render_every (int): How many episodes to train between rendering the game played by the model
+* render_speed (int): How fast to render the game
 
 The model can be started by running scripts/pong.sh from the root directory. A trained checkpoint file is included in the outputs folder in which the AI has been trained for 12000 episodes.
