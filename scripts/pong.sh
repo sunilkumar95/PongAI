@@ -13,6 +13,6 @@ python src/pong.py \
   --restore=True\
   --render=True\
   --render_every=1\
-  --render_speed=5\
+  --render_speed=6\
   "$@"
 

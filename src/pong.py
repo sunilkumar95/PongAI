@@ -5,7 +5,7 @@ from __future__ import print_function
 import os
 import sys
 import time
-import cPickle as pickle
+import _pickle as pickle
 import shutil
 from skimage.color import rgb2gray
 
